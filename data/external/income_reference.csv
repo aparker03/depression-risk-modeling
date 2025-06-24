@@ -1,0 +1,11 @@
+Race_Group,Edu_Group,Gender_Label,Median_Income
+White,Bachelor's degree or higher,Male,119400
+"White, not Hispanic",Bachelor's degree or higher,Male,126800
+Black,"High school, no college",Female,55810
+Asian,Bachelor's degree or higher,Male,112800
+Hispanic (any race),Some college,Female,73610
+"White, not Hispanic",Some college,Female,73610
+Black,No high school diploma,Male,36230
+Asian,Some college,Female,73610
+Hispanic (any race),Bachelor's degree or higher,Female,126800
+"White, not Hispanic","High school, no college",Male,55810
