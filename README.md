@@ -17,7 +17,7 @@ This was a collaborative project. Responsibilities and contributions are detaile
 ---
 
 ## Repository Structure
-
+```
 depression-risk-modeling/
 │
 ├── data/
@@ -35,7 +35,7 @@ depression-risk-modeling/
 │ └── DBSCAN_to_SL_BFOX.ipynb
 │
 └── README.md # Project summary and instructions
-
+```
 ---
 
 ## Data Sources
