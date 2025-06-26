@@ -167,21 +167,59 @@ Three methods were used to discover latent patterns and reduce dimensionality:
 
 ## How to Reproduce
 
-1. **Download & convert NHANES data**  
-   Run `scripts/nhanes_download_convert.ipynb` to pull and convert data into `/data/raw`.
+### 1. Download & Convert NHANES Data
+Run the following notebook to download raw `.xpt` files and convert them to CSV:
 
-2. **Clean and merge modules**  
-   Use scripts to generate `/data/clean/merged_clean.csv`.
+```bash
+scripts/nhanes_download_convert.ipynb
+```
 
-3. **Run supervised notebooks**  
-   Choose from:
-   - `sl/KMEANStoSL_alexis.ipynb`
-   - `sl/PCAtoSL_vik.ipynb`
-   - `sl/DBSCAN_to_SL_BFOX.ipynb`
+This will populate the `/data/raw/` folder.
 
-4. **Examine SHAP and Confusion Matrices**  
-   Review model explanations and classification results.
+---
 
+### 2. Clean and Merge Modules
+Use the provided scripts and notebooks to clean each NHANES module and generate:
+
+```bash
+/data/clean/merged_clean.csv
+```
+
+This is the main modeling dataset used across UL and SL notebooks.
+
+---
+
+### 3. Run Unsupervised Learning (UL) Notebooks
+Explore clustering and dimensionality reduction using:
+
+```bash
+ul/kmeans_alexis.ipynb
+ul/pca_vik.ipynb
+ul/dbscan_bfox.ipynb
+```
+
+These notebooks prepare features and visualizations for downstream modeling.
+
+---
+
+### 4. Run Supervised Learning (SL) Notebooks
+Train and evaluate models using unsupervised-derived features:
+
+```bash
+sl/KMEANStoSL_alexis.ipynb
+sl/PCAtoSL_vik.ipynb
+sl/DBSCAN_to_SL_BFOX.ipynb
+```
+
+Each notebook runs three classifiers: Logistic Regression, Random Forest, and SVM.
+
+---
+
+### 5. Examine Results and Interpretability
+- Review performance metrics: Accuracy, F1 Score, Macro-Averaged ROC-AUC
+- Visualize model explanations using SHAP
+- Analyze confusion matrices to assess prediction strengths and failure modes
+```
 ---
 
 ## References
