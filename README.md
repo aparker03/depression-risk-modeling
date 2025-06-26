@@ -21,20 +21,25 @@ This was a collaborative project. Responsibilities and contributions are detaile
 depression-risk-modeling/
 │
 ├── data/
-│ ├── raw/ # Raw NHANES module CSVs (converted from .xpt)
-│ ├── clean/ # Cleaned and merged datasets
-│ └── external/ # Census-based reference data (e.g. income by demo group)
+│   ├── raw/                 # Raw NHANES module CSVs (converted from .xpt)
+│   ├── clean/               # Cleaned and merged datasets
+│   └── external/            # Census-based reference data (e.g. income by demo group)
 │
 ├── scripts/
-│ ├── nhanes_download_convert.ipynb # Script to download and convert .xpt NHANES data
-│ └── recover_seqn_demo_link.py # Recovery script to manage SEQN-based merges
+│   ├── nhanes_download_convert.ipynb     # Script to download and convert .xpt NHANES data
+│   └── recover_seqn_demo_link.py         # Recovery script to manage SEQN-based merges
 │
-├── sl/ # Supervised learning notebooks by team member and UL method
-│ ├── KMEANStoSL_alexis.ipynb
-│ ├── PCAtoSL_vik.ipynb
-│ └── DBSCAN_to_SL_BFOX.ipynb
+├── sl/                      # Supervised learning notebooks by team member and UL method
+│   ├── KMEANStoSL_alexis.ipynb
+│   ├── PCAtoSL_vik.ipynb
+│   └── DBSCAN_to_SL_BFOX.ipynb
 │
-└── README.md # Project summary and instructions
+├── ul/                      # Unsupervised learning analysis notebooks
+│   ├── kmeans_alexis.ipynb
+│   ├── pca_vik.ipynb
+│   └── dbscan_bfox.ipynb
+│
+└── README.md                # Project summary and instructions
 ```
 ---
 
