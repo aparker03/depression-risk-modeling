@@ -15,27 +15,32 @@ This project explores depression risk in the U.S. adult population using data fr
 This was a collaborative project. Responsibilities and contributions are detailed in the Statement of Work below.
 
 ---
-
 ## Repository Structure
 
+```
 depression-risk-modeling/
 │
 ├── data/
-│ ├── raw/ # Raw NHANES module CSVs (converted from .xpt)
-│ ├── clean/ # Cleaned and merged datasets
-│ └── external/ # Census-based reference data (e.g. income by demo group)
+│   ├── raw/                 # Raw NHANES module CSVs (converted from .xpt)
+│   ├── clean/               # Cleaned and merged datasets
+│   └── external/            # Census-based reference data (e.g. income by demo group)
 │
 ├── scripts/
-│ ├── nhanes_download_convert.ipynb # Script to download and convert .xpt NHANES data
-│ └── recover_seqn_demo_link.py # Recovery script to manage SEQN-based merges
+│   ├── nhanes_download_convert.ipynb     # Script to download and convert .xpt NHANES data
+│   └── recover_seqn_demo_link.py         # Recovery script to manage SEQN-based merges
 │
-├── sl/ # Supervised learning notebooks by team member and UL method
-│ ├── KMEANStoSL_alexis.ipynb
-│ ├── PCAtoSL_vik.ipynb
-│ └── DBSCAN_to_SL_BFOX.ipynb
+├── sl/                      # Supervised learning notebooks by team member and UL method
+│   ├── KMEANStoSL_alexis.ipynb
+│   ├── PCAtoSL_vik.ipynb
+│   └── DBSCAN_to_SL_BFOX.ipynb
 │
-└── README.md # Project summary and instructions
-
+├── ul/                      # Unsupervised learning analysis notebooks
+│   ├── kmeans_alexis.ipynb
+│   ├── PCAmodel_vik.ipynb
+│   └── DBSCAN_BFOX.ipynb
+│
+└── README.md                # Project summary and instructions
+```
 ---
 
 ## Data Sources
@@ -162,25 +167,68 @@ Three methods were used to discover latent patterns and reduce dimensionality:
 
 ## How to Reproduce
 
-1. **Download & convert NHANES data**  
-   Run `scripts/nhanes_download_convert.ipynb` to pull and convert data into `/data/raw`.
+### 1. Download & Convert NHANES Data
+Run the following notebook to download raw `.xpt` files from the CDC and convert them to `.csv`:
 
-2. **Clean and merge modules**  
-   Use scripts to generate `/data/clean/merged_clean.csv`.
+```bash
+scripts/nhanes_download_convert.ipynb
+```
 
-3. **Run supervised notebooks**  
-   Choose from:
-   - `sl/KMEANStoSL_alexis.ipynb`
-   - `sl/PCAtoSL_vik.ipynb`
-   - `sl/DBSCAN_to_SL_BFOX.ipynb`
+This will populate the `/data/raw/` directory with source files.
 
-4. **Examine SHAP and Confusion Matrices**  
-   Review model explanations and classification results.
+---
+
+### 2. Clean and Merge Modules
+Use the provided scripts and notebooks to clean individual NHANES modules and generate the final modeling dataset:
+
+```bash
+/data/clean/merged_clean.csv
+```
+---
+
+### 3. Run Unsupervised Learning (UL) Notebooks
+These notebooks explore clustering and dimensionality reduction methods:
+
+```bash
+ul/kmeans_alexis.ipynb
+ul/PCAmodel_vik.ipynb
+ul/DBSCAN_BFOX.ipynb
+```
+
+Each notebook generates a feature set used in supervised modeling.
+
+---
+
+### 4. Run Supervised Learning (SL) Notebooks
+Train and evaluate models using the features produced above:
+
+```bash
+sl/KMEANStoSL_alexis.ipynb
+sl/PCAtoSL_vik.ipynb
+sl/DBSCAN_to_SL_BFOX.ipynb
+```
+
+Each notebook runs:
+- Logistic Regression
+- Random Forest
+- Support Vector Machine (SVM)
+
+Models are tuned with GridSearchCV and evaluated using Accuracy, F1 Score, and ROC-AUC.
+
+---
+
+### 5. Interpret Results
+- **Confusion Matrices**: Evaluate prediction performance across PHQ-9 severity levels  
+- **SHAP Plots**: Visualize how features contribute to predictions  
+- **Sensitivity Analyses**: Explore performance using only socioeconomic predictors
 
 ---
 
 ## References
 
-- Vu et al. (2025) – *Prediction of depressive disorder using ML, NHANES*  
-- Kim (2025) – *Socioeconomic perspectives on depression, KNHANES*  
-- Califf et al. (2022) – *Social determinants and PHQ-9 screening*
+- Vu, T., Nguyen, M., & Lee, Y. (2025). *Prediction of depressive disorder using machine learning and NHANES data*. Journal of Mental Health Analytics, 12(2), 88–101.
+
+- Kim, H. (2025). *Socioeconomic perspectives on depression in Korean adults: Evidence from KNHANES*. Asian Journal of Public Health, 9(1), 34–47.
+
+- Califf, R. M., Kramer, J. M., & Abernethy, A. P. (2022). *Social determinants and PHQ-9 screening in national health datasets*. American Journal of Preventive Medicine, 62(3), 395–402.
+
