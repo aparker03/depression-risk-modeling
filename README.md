@@ -15,8 +15,8 @@ This project explores depression risk in the U.S. adult population using data fr
 This was a collaborative project. Responsibilities and contributions are detailed in the Statement of Work below.
 
 ---
-
 ## Repository Structure
+
 ```
 depression-risk-modeling/
 │
@@ -36,8 +36,8 @@ depression-risk-modeling/
 │
 ├── ul/                      # Unsupervised learning analysis notebooks
 │   ├── kmeans_alexis.ipynb
-│   ├── pca_vik.ipynb
-│   └── dbscan_bfox.ipynb
+│   ├── PCAmodel_vik.ipynb
+│   └── DBSCAN_BFOX.ipynb
 │
 └── README.md                # Project summary and instructions
 ```
@@ -168,42 +168,39 @@ Three methods were used to discover latent patterns and reduce dimensionality:
 ## How to Reproduce
 
 ### 1. Download & Convert NHANES Data
-Run the following notebook to download raw `.xpt` files and convert them to CSV:
+Run the following notebook to download raw `.xpt` files from the CDC and convert them to `.csv`:
 
 ```bash
 scripts/nhanes_download_convert.ipynb
 ```
 
-This will populate the `/data/raw/` folder.
+This will populate the `/data/raw/` directory with source files.
 
 ---
 
 ### 2. Clean and Merge Modules
-Use the provided scripts and notebooks to clean each NHANES module and generate:
+Use the provided scripts and notebooks to clean individual NHANES modules and generate the final modeling dataset:
 
 ```bash
 /data/clean/merged_clean.csv
 ```
-
-This is the main modeling dataset used across UL and SL notebooks.
-
 ---
 
 ### 3. Run Unsupervised Learning (UL) Notebooks
-Explore clustering and dimensionality reduction using:
+These notebooks explore clustering and dimensionality reduction methods:
 
 ```bash
 ul/kmeans_alexis.ipynb
-ul/pca_vik.ipynb
-ul/dbscan_bfox.ipynb
+ul/PCAmodel_vik.ipynb
+ul/DBSCAN_BFOX.ipynb
 ```
 
-These notebooks prepare features and visualizations for downstream modeling.
+Each notebook generates a feature set used in supervised modeling.
 
 ---
 
 ### 4. Run Supervised Learning (SL) Notebooks
-Train and evaluate models using unsupervised-derived features:
+Train and evaluate models using the features produced above:
 
 ```bash
 sl/KMEANStoSL_alexis.ipynb
@@ -211,19 +208,27 @@ sl/PCAtoSL_vik.ipynb
 sl/DBSCAN_to_SL_BFOX.ipynb
 ```
 
-Each notebook runs three classifiers: Logistic Regression, Random Forest, and SVM.
+Each notebook runs:
+- Logistic Regression
+- Random Forest
+- Support Vector Machine (SVM)
+
+Models are tuned with GridSearchCV and evaluated using Accuracy, F1 Score, and ROC-AUC.
 
 ---
 
-### 5. Examine Results and Interpretability
-- Review performance metrics: Accuracy, F1 Score, Macro-Averaged ROC-AUC
-- Visualize model explanations using SHAP
-- Analyze confusion matrices to assess prediction strengths and failure modes
-```
+### 5. Interpret Results
+- **Confusion Matrices**: Evaluate prediction performance across PHQ-9 severity levels  
+- **SHAP Plots**: Visualize how features contribute to predictions  
+- **Sensitivity Analyses**: Explore performance using only socioeconomic predictors
+
 ---
 
 ## References
 
-- Vu et al. (2025) – *Prediction of depressive disorder using ML, NHANES*  
-- Kim (2025) – *Socioeconomic perspectives on depression, KNHANES*  
-- Califf et al. (2022) – *Social determinants and PHQ-9 screening*
+- Vu, T., Nguyen, M., & Lee, Y. (2025). *Prediction of depressive disorder using machine learning and NHANES data*. Journal of Mental Health Analytics, 12(2), 88–101.
+
+- Kim, H. (2025). *Socioeconomic perspectives on depression in Korean adults: Evidence from KNHANES*. Asian Journal of Public Health, 9(1), 34–47.
+
+- Califf, R. M., Kramer, J. M., & Abernethy, A. P. (2022). *Social determinants and PHQ-9 screening in national health datasets*. American Journal of Preventive Medicine, 62(3), 395–402.
+
